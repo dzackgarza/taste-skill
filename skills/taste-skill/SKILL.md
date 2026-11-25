@@ -1,16 +1,7 @@
 ---
 name: design-taste-frontend
 description: >-
-  tasteskill 2.5.1, the anti-slop frontend skill. Builds professional company websites at the level
-  of figma.com and x.ai: plain copy in a voice of its own, one system, one section per screen,
-  equal edges, real photographs and real product UI (licensed stand-in photographs when the client
-  has none; a product render only when the brief asks for 3D), a hero entrance and one or two dealt
-  moments on every page, shader effects and scenes only on tech, gaming and software pages, quiet
-  micro-interactions, and a checker and finish gate that enforce it in a real browser. Use this
-  whenever you build, design, redesign, restyle, polish or review a landing page, company,
-  product, shop, cafe, hotel, studio, SaaS, AI, developer-tool or game site, as static HTML/CSS or
-  inside an existing React, Next.js, Vue, Svelte, Astro or Tailwind project, or when the user says
-  a page looks generic, templated or "AI-made".
+  Use when building, redesigning, restyling, or reviewing a website or landing page, as static HTML/CSS or inside a React, Next.js, Vue, Svelte, or Astro app.
 hooks:
   Stop:
     - hooks:
@@ -193,14 +184,19 @@ Read `copy.md`, `copy-voice.md`, `system.md`, `layout-v4.md` and `sections.md` i
    stand-ins included, sets a place's length (section 2). Then read `cards.md` and the recipe of
    every id you use in `sections-library.md`.
 
-4. **Deal, never choose by taste.** Each command keeps a history, so pages differ:
+4. **Deal, never choose by taste.** Each command keeps a history, so pages differ. In order:
+   `deal.mjs` deals the hero (a game adds `--kind gaming`, hardware `--kind tech`);
+   `start.mjs deal` deals three palettes made for the trade and three pairings: take the first, and
+   add `--axis` after a word or editorial hero; `start.mjs css` writes the styles; `start.mjs brand`
+   takes the client's own colours (a logo, a painted shopfront) in place of `css`; `moments.mjs
+   pick` runs for every kind; the last line picks one item from each of the kind's lists below.
 
    ```bash
-   node <skill>/assets/layout/deal.mjs --type <page type> --has <photo,ui,film,object,setting> --history .taste-skill/layout-history.json   # the hero; a game adds --kind gaming, hardware --kind tech
-   node <skill>/scripts/start.mjs deal --page <kind> --trade <trade> --history .taste-skill/history.json    # three palettes made for the trade, three pairings: take the first; add --axis after a word or editorial hero
+   node <skill>/assets/layout/deal.mjs --type <page type> --has <photo,ui,film,object,setting> --history .taste-skill/layout-history.json
+   node <skill>/scripts/start.mjs deal --page <kind> --trade <trade> --history .taste-skill/history.json
    node <skill>/scripts/start.mjs css --page <kind> --palette <id> --type <id> --radius soft --history .taste-skill/history.json
-   node <skill>/scripts/start.mjs brand --page place --bg "#.." --ink "#.." --accent "#.." [--surface "#.."] [--muted "#.."] --type <id> --radius soft   # the client's own colours (a logo, a painted shopfront), in place of css
-   node <skill>/scripts/moments.mjs pick --page <kind> --count 1|2 --fits section,statement --photo --history .taste-skill/history.json   # every kind
+   node <skill>/scripts/start.mjs brand --page place --bg "#.." --ink "#.." --accent "#.." [--surface "#.."] [--muted "#.."] --type <id> --radius soft
+   node <skill>/scripts/moments.mjs pick --page <kind> --count 1|2 --fits section,statement --photo --history .taste-skill/history.json
    node -e "for(const l of process.argv.slice(1)){const o=l.split('|');console.log(o[Math.floor(Math.random()*o.length)])}" <the kind's lists, below>
    ```
 
